@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: that-guytp-backend
+    runtime: docker
+    plan: free
+    region: virginia
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://that-guytp.github.io
