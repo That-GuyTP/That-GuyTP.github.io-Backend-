@@ -1,4 +1,3 @@
-package edu.usc.csce145.chapter03;
 
 //Thomas Peterson
 
