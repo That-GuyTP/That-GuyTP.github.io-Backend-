@@ -9,3 +9,5 @@ services:
     envVars:
       - key: CORS_ALLOWED_ORIGINS
         value: https://that-guytp.github.io
+      - key: LLL_TOKEN_SECRET
+        generateValue: true

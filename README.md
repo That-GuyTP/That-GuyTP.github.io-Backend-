@@ -1,52 +1,53 @@
 # That-GuyTP.github.io Backend
 
-This repository contains backend APIs for modules showcased on https://that-guytp.github.io.
+This repository contains backend APIs for modules showcased on:
+https://that-guytp.github.io
 
 ## Stack
 
 - Java 21
 - Spring Boot 3
 - Maven
-- Docker (for Render deployment)
+- Docker (Render deployment)
 
-## Current API
+## Current APIs
 
-### Health check
+### Health
 
 - `GET /health`
+- `GET /api/health`
 
-Returns:
-
-```json
-{ "status": "ok" }
-```
-
-### SortSorter API
+### SortSorter
 
 - `POST /api/sortsorter/sort`
 
-Request body:
+### LoveLearningLangs
 
-```json
-{
-  "words": ["sort", "assorted", "banana", "SortSorter"]
-}
-```
+- `GET /api/content/bootstrap`
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `POST /api/progress/add-language`
+- `POST /api/progress/complete-exercise`
+- `GET /api/progress/review`
+- `POST /api/exercise/start`
+- `POST /api/exercise/submit`
 
-Response body:
+LLL data files are loaded from:
+- `data/lovelearninglangs/Words.json`
+- `data/lovelearninglangs/Phrases.json`
+- `data/lovelearninglangs/Users.json`
+- `data/lovelearninglangs/IpSaveHistory.json`
 
-```json
-{
-  "sortedWords": ["banana", "sort", "assorted", "SortSorter"],
-  "sortedEntries": [
-    { "word": "banana", "sortCount": 0 },
-    { "word": "sort", "sortCount": 1 },
-    { "word": "assorted", "sortCount": 1 },
-    { "word": "SortSorter", "sortCount": 2 }
-  ],
-  "inputSize": 4
-}
-```
+## Environment variables
+
+- `PORT` (provided by Render)
+- `CORS_ALLOWED_ORIGINS` (comma-separated)
+- `LLL_TOKEN_SECRET` (required in production)
+- `LLL_USER_RETENTION_MS` (optional)
+- `LLL_SAVE_LIMIT_MAX` (optional)
+- `LLL_SAVE_LIMIT_WINDOW_MS` (optional)
+- `LLL_DATA_DIR` (optional override for LLL data path)
 
 ## Local run
 
@@ -60,9 +61,15 @@ Default URL: `http://localhost:8080`
 
 - Service type: `Web Service`
 - Runtime: `Docker`
-- Plan: `Free` (upgrade to `Starter` for no spin-down)
 - Health check path: `/health`
-- Required env var:
+- Recommended vars:
   - `CORS_ALLOWED_ORIGINS=https://that-guytp.github.io`
+  - `LLL_TOKEN_SECRET=<secure-random-value>`
 
-You can deploy using `render.yaml` in this repository.
+## Frontend connection
+
+In the frontend repository, set:
+
+```bash
+VITE_LLL_API_BASE_URL=https://<your-render-backend>/api
+```
